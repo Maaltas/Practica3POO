@@ -148,13 +148,41 @@ public class Poblacio {
         }
         return s;
     }
-    // Mètode ContenidorBrossa mesRendiment(int tipus) que ha de trobar el contenidor -
-    // del tipus indicat en el paràmetre- de la població que té més rendiment (recicla més).
     public ContenidorBrossa mesRendiment(int tipus){
-        int posicio=0, maxReciclat=0;;
-
-
-        return null;
+        ContenidorBrossa c = null;
+        int posicio=0;
+        float maxReciclat = 0, temp = 0;
+        String s="";
+        if (tipus>=ContenidorBrossa.Groc && tipus<=ContenidorBrossa.Blau){
+            for (int i=0; i<numContenidors; i++){
+                switch (tipus){
+                    case ContenidorBrossa.Marro:
+                        s = ((Organic)contenidors[i]).getReciclat();
+                        break;
+                    case ContenidorBrossa.Verd:
+                        s = ((Vidre)contenidors[i]).getReciclat();
+                        break;
+                    case ContenidorBrossa.Gris:
+                        s = ((Rebuig)contenidors[i]).getReciclat();
+                        break;
+                    case ContenidorBrossa.Blau:
+                        s = ((Paper)contenidors[i]).getReciclat();
+                        break;
+                    default:
+                    case ContenidorBrossa.Groc:
+                        s = ((Plàstic)contenidors[i]).getReciclat();
+                        break;
+                }
+                posicio = s.indexOf(" ");
+                s = s.substring(0,posicio);
+                temp = Float.parseFloat(s);
+                if (temp>maxReciclat){
+                    maxReciclat = temp;
+                    c = contenidors[i];
+                }
+            }
+        }
+        return c;
     }
 
     public boolean equals(Poblacio p) {
